@@ -859,6 +859,8 @@ const HomeScreen = ({ onNavigate }) => {
       setCurrentScreen('categories');
     } else if (screenId === 'promotions') {
       setCurrentScreen('offers');
+    } else if (screenId === 'offers') {
+      setCurrentScreen('offers');
     } else if (screenId === 'cart') {
       setCurrentScreen('cart');
     } else if (screenId === 'notifications') {
