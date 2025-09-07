@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .debug-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Debug Test</h1>
+    
+    <div class="test-section">
+        <h2>Font File Accessibility Test</h2>
+        <div id="font-files-status">Checking font files...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Font Loading Test</h2>
+        <div id="font-loading-status">Checking font loading...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>CSS Test</h2>
+        <div id="css-status">Checking CSS...</div>
+    </div>
+
+    <script>
+        // Test font file accessibility
+        const fontFiles = [
+            '/fonts/saudi_riyal.woff2',
+            '/fonts/saudi_riyal.woff',
+            '/fonts/saudi_riyal.ttf',
+            '/fonts/saudi_riyal.eot',
+            '/fonts/saudi_riyal.svg'
+        ];
+
+        const fontFilesStatus = document.getElementById('font-files-status');
+        let accessibleFiles = 0;
+
+        fontFiles.forEach(fontFile => {
+            fetch(fontFile)
+                .then(response => {
+                    if (response.ok) {
+                        accessibleFiles++;
+                        fontFilesStatus.innerHTML += `<div class="success">✅ ${fontFile} - Accessible</div>`;
+                    } else {
+                        fontFilesStatus.innerHTML += `<div class="error">❌ ${fontFile} - Not accessible (${response.status})</div>`;
+                    }
+                })
+                .catch(error => {
+                    fontFilesStatus.innerHTML += `<div class="error">❌ ${fontFile} - Error: ${error.message}</div>`;
+                });
+        });
+
+        // Test font loading
+        document.fonts.ready.then(() => {
+            const fontLoadingStatus = document.getElementById('font-loading-status');
+            
+            // Check if saudi_riyal font is loaded
+            const saudiFontLoaded = document.fonts.check('16px saudi_riyal');
+            
+            if (saudiFontLoaded) {
+                fontLoadingStatus.innerHTML = '<div class="success">✅ Saudi font loaded successfully!</div>';
+            } else {
+                fontLoadingStatus.innerHTML = '<div class="error">❌ Saudi font not loaded</div>';
+            }
+
+            // List all loaded fonts
+            const loadedFonts = Array.from(document.fonts).map(font => font.family);
+            fontLoadingStatus.innerHTML += `<div class="debug-info">Loaded fonts: ${loadedFonts.join(', ')}</div>`;
+        });
+
+        // Test CSS loading
+        const cssStatus = document.getElementById('css-status');
+        const cssLink = document.querySelector('link[href*="saudi-riyal-font.css"]');
+        
+        if (cssLink) {
+            cssStatus.innerHTML = '<div class="success">✅ CSS file linked</div>';
+        } else {
+            cssStatus.innerHTML = '<div class="error">❌ CSS file not linked</div>';
+        }
+
+        // Check computed styles
+        const testElement = document.createElement('div');
+        testElement.className = 'icon-saudi_riyal';
+        document.body.appendChild(testElement);
+        
+        const computedStyle = window.getComputedStyle(testElement, '::before');
+        const content = computedStyle.content;
+        const fontFamily = computedStyle.fontFamily;
+        
+        cssStatus.innerHTML += `<div class="debug-info">CSS Test:<br>
+            Content: ${content}<br>
+            Font Family: ${fontFamily}</div>`;
+    </script>
+</body>
+</html>

@@ -1,11 +1,14 @@
-/* Saudi Riyal Font - Using npm package approach */
+/* Saudi Riyal Font - Using src directory approach */
 @font-face {
   font-family: 'saudi_riyal';
-  src: url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.woff2') format('woff2'),
-       url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.woff') format('woff'),
-       url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.ttf') format('truetype');
+  src: url('./fonts/saudi_riyal.woff2') format('woff2'),
+       url('./fonts/saudi_riyal.woff') format('woff'),
+       url('./fonts/saudi_riyal.ttf') format('truetype'),
+       url('./fonts/saudi_riyal.eot') format('embedded-opentype'),
+       url('./fonts/saudi_riyal.svg#saudi_riyal') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 /* Ensure the icon class correctly loads the Riyal symbol */
