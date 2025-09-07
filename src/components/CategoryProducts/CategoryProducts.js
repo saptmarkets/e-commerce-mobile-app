@@ -336,22 +336,6 @@ const ProductAddButton = styled(motion.button)`
   }
 `;
 
-// Bottom Navigation
-const BottomNavigation = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: white;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-`;
-
 const NavItem = styled(motion.div)`
   display: flex;
   flex-direction: column;

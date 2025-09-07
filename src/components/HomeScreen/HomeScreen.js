@@ -496,59 +496,6 @@ const ProductAddButton = styled(motion.button)`
   }
 `;
 
-// Bottom Navigation
-const BottomNavigation = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: white;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const NavItem = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  gap: 3px;
-  min-width: 50px;
-  
-  &:hover {
-    background: rgba(116, 48, 140, 0.05);
-  }
-  
-  &.active {
-    background: rgba(255, 193, 7, 0.15);
-  }
-`;
-
-const NavIcon = styled.div`
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
-`;
-
-const NavLabel = styled.div`
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: ${props => props.active ? '#74308c' : 'rgba(116, 48, 140, 0.7)'};
-  font-family: ${theme.typography.fontFamily.arabic};
-  transition: all 0.3s ease;
-  text-align: center;
-  direction: rtl;
-`;
-
 // Floating Cart Icon
 const FloatingCart = styled(motion.div)`
   position: absolute;
@@ -957,14 +904,6 @@ const HomeScreen = ({ onNavigate }) => {
     { emoji: '🥒', name: 'خيار', price: '3.99' }
   ];
 
-  const navItems = [
-    { icon: '🏠', label: 'الرئيسية', id: 'home' },
-    { icon: '📂', label: 'التصنيفات', id: 'categories' },
-    { icon: '🎯', label: 'العروض', id: 'promotions' },
-    { icon: '📋', label: 'الطلبات', id: 'orders' },
-    { icon: '💎', label: 'النقاط', id: 'loyalty' }
-  ];
-
   const categories = [
     { icon: '🥬', name: 'الخضروات', id: 'vegetables', bgImage: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop' },
     { icon: '🍎', name: 'الفواكه', id: 'fruits', bgImage: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop' },
@@ -1344,23 +1283,10 @@ const HomeScreen = ({ onNavigate }) => {
       </MainContent>
 
       {/* Bottom Navigation */}
-      <BottomNavigation>
-        {navItems.map((item, index) => (
-          <NavItem
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 + index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={item.id === 'home' ? 'active' : ''}
-            onClick={() => handleNavigation(item.id)}
-          >
-            <NavIcon>{item.icon}</NavIcon>
-            <NavLabel active={item.id === 'home'}>{item.label}</NavLabel>
-          </NavItem>
-        ))}
-      </BottomNavigation>
+      <BottomNavigation 
+        currentScreen={currentScreen} 
+        onNavigate={handleNavigation} 
+      />
 
       {/* Floating Cart Icon */}
       <FloatingCart
