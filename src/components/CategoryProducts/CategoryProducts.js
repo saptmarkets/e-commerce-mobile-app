@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { theme } from '../../theme';
 import ProductDetails from '../ProductDetails';
+import BottomNavigation from '../BottomNavigation';
 
 // Animations
 const fadeIn = keyframes`
@@ -691,23 +692,10 @@ const CategoryProducts = ({ categoryId, categoryName, onNavigate, onAddToCart, c
       </MainContent>
 
       {/* Bottom Navigation */}
-      <BottomNavigation>
-        {navItems.map((item, index) => (
-          <NavItem
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={item.id === 'categories' ? 'active' : ''}
-            onClick={() => handleNavigation(item.id)}
-          >
-            <NavIcon>{item.icon}</NavIcon>
-            <NavLabel active={item.id === 'categories'}>{item.label}</NavLabel>
-          </NavItem>
-        ))}
-      </BottomNavigation>
+      <BottomNavigation 
+        currentScreen="categories" 
+        onNavigate={onNavigate} 
+      />
 
       {/* Floating Cart Icon */}
       <FloatingCart

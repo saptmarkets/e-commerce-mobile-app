@@ -755,6 +755,7 @@ const DiscountPercent = styled.div`
 `;
 
 const HomeScreen = ({ onNavigate }) => {
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [isProductModalOpen, setIsProductModalOpen] = React.useState(false);
   const [currentScreen, setCurrentScreen] = React.useState('home');
