@@ -755,7 +755,7 @@ const DiscountPercent = styled.div`
 `;
 
 const HomeScreen = ({ onNavigate }) => {
-  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [isProductModalOpen, setIsProductModalOpen] = React.useState(false);
   const [currentScreen, setCurrentScreen] = React.useState('home');
   const [cartItems, setCartItems] = React.useState([]);
@@ -991,6 +991,7 @@ const HomeScreen = ({ onNavigate }) => {
         onNavigate={handleNavigation}
         onAddToCart={handleAddToCart}
         cartCount={cartItems.reduce((s, i) => s + i.qty, 0)}
+        selectedCategory={selectedCategory}
       />
     );
   }
@@ -1164,9 +1165,8 @@ const HomeScreen = ({ onNavigate }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
+                  setSelectedCategory(category);
                   setCurrentScreen('categories');
-                  // Store the selected category for CategoriesScreen to use
-                  localStorage.setItem('selectedCategory', JSON.stringify(category));
                 }}
               >
                 <CategoryStrip>

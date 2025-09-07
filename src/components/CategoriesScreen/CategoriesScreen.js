@@ -329,21 +329,26 @@ const CartBadge = styled.div`
 `;
 
 // Categories Screen Component
-const CategoriesScreen = ({ onNavigate, onAddToCart, cartCount = 0 }) => {
+const CategoriesScreen = ({ onNavigate, onAddToCart, cartCount = 0, selectedCategory: propSelectedCategory }) => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [currentScreen, setCurrentScreen] = React.useState('categories');
 
-  // Check for selected category from localStorage on mount
+  // Check for selected category from prop or localStorage on mount
   React.useEffect(() => {
-    const storedCategory = localStorage.getItem('selectedCategory');
-    if (storedCategory) {
-      const category = JSON.parse(storedCategory);
-      setSelectedCategory(category);
+    if (propSelectedCategory) {
+      setSelectedCategory(propSelectedCategory);
       setCurrentScreen('category-products');
-      // Clear the stored category after using it
-      localStorage.removeItem('selectedCategory');
+    } else {
+      const storedCategory = localStorage.getItem('selectedCategory');
+      if (storedCategory) {
+        const category = JSON.parse(storedCategory);
+        setSelectedCategory(category);
+        setCurrentScreen('category-products');
+        // Clear the stored category after using it
+        localStorage.removeItem('selectedCategory');
+      }
     }
-  }, []);
+  }, [propSelectedCategory]);
 
   const navItems = [
     { icon: '🏠', label: 'الرئيسية', id: 'home' },
