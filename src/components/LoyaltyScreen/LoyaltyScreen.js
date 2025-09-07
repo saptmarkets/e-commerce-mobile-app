@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { theme } from '../../theme';
+import BottomNavigation from '../BottomNavigation';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -456,6 +457,12 @@ const LoyaltyScreen = ({ onNavigate, phoneNumber }) => {
           </svg>
         </ScrollButton>
       </MainContent>
+      
+      {/* Bottom Navigation */}
+      <BottomNavigation 
+        currentScreen="loyalty" 
+        onNavigate={onNavigate} 
+      />
     </MobileFrame>
   );
 };

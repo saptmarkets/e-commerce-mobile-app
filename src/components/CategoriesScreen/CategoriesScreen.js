@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { theme } from '../../theme';
 import CategoryProducts from '../CategoryProducts';
+import BottomNavigation from '../BottomNavigation';
 
 // Animations
 const fadeIn = keyframes`
@@ -499,6 +500,12 @@ const CategoriesScreen = ({ onNavigate, onAddToCart, cartCount = 0 }) => {
         </CartIcon>
         {cartCount > 0 && <CartBadge>{cartCount}</CartBadge>}
       </FloatingCart>
+      
+      {/* Bottom Navigation */}
+      <BottomNavigation 
+        currentScreen="categories" 
+        onNavigate={handleNavigation} 
+      />
     </MobileFrame>
   );
 };

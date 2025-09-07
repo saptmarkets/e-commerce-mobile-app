@@ -13,6 +13,7 @@ import CartScreen from '../CartScreen';
 import OrderConfirmationScreen from '../OrderConfirmationScreen';
 import UserProfileScreen from '../UserProfileScreen';
 import LoginRegisterScreen from '../LoginRegisterScreen';
+import BottomNavigation from '../BottomNavigation';
 
 // Animations
 const fadeIn = keyframes`
@@ -46,6 +47,7 @@ const MobileFrame = styled(motion.div)`
 const MainContent = styled.div`
   height: calc(100% - 80px); /* Leave space for bottom navigation */
   padding: 20px;
+  padding-bottom: 100px; /* Extra padding for bottom nav */
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -1386,6 +1388,12 @@ const HomeScreen = ({ onNavigate }) => {
         onClose={handleCloseModal}
         onAddToCart={handleAddToCart}
         onBuyNow={handleBuyNow}
+      />
+      
+      {/* Bottom Navigation */}
+      <BottomNavigation 
+        currentScreen={currentScreen} 
+        onNavigate={handleNavigation} 
       />
     </MobileFrame>
   );

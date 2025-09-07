@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { theme } from '../../theme';
+import BottomNavigation from '../BottomNavigation';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -155,6 +156,12 @@ const OrdersScreen = ({ onNavigate }) => {
           ))}
         </List>
       </MainContent>
+      
+      {/* Bottom Navigation */}
+      <BottomNavigation 
+        currentScreen="orders" 
+        onNavigate={onNavigate} 
+      />
     </MobileFrame>
   );
 };

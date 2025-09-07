@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { theme } from '../../theme';
+import BottomNavigation from '../BottomNavigation';
  
 
 // Animations
@@ -742,6 +743,11 @@ const OffersScreen = ({ onNavigate, onAddToCart, cartCount = 0 }) => {
         {cartCount > 0 && <CartBadge>{cartCount}</CartBadge>}
       </FloatingCart>
 
+      {/* Bottom Navigation */}
+      <BottomNavigation 
+        currentScreen="offers" 
+        onNavigate={onNavigate} 
+      />
     </MobileFrame>
   );
 };
