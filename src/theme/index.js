@@ -32,6 +32,7 @@ export const theme = {
     fontFamily: {
       arabic: "'Noor', 'Noto Sans Arabic', 'Arial', sans-serif",
       english: "'Inter', 'Arial', sans-serif",
+      saudi: "'saudi_riyal', 'Open Sans', sans-serif",
     },
     fontSize: {
       xs: '10px',
@@ -48,6 +49,10 @@ export const theme = {
       medium: 500,
       semibold: 600,
       bold: 700,
+    },
+    currency: {
+      saudiRiyal: '\uE900', // Private-use code-point rendered via saudi_riyal font
+      display: 'ريال', // Arabic text for "Riyal"
     },
   },
   
