@@ -1,0 +1,129 @@
+/* Design System Colors */
+:root {
+  /* Brand Colors */
+  --brand-green: #4CAF50;
+  --brand-green-dark: #388E3C;
+  --brand-green-light: #81C784;
+  --brand-purple: #800080;
+  --brand-purple-light: #A9A9A9;
+  
+  /* Neutral Colors */
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+  
+  /* Status Colors */
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --info: #2196F3;
+  
+  /* Typography */
+  --font-family-arabic: 'Noor', 'Noto Sans Arabic', 'Arial', sans-serif;
+  --font-family-english: 'Inter', 'Arial', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-brand: 0 4px 12px rgba(76, 175, 80, 0.15);
+}
+
+/* Noor Arabic Font */
+@font-face {
+  font-family: 'Noor';
+  src: url('./assets/fonts/Noor.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Noor font utility classes */
+.font-noor {
+  font-family: 'Noor', 'Arial', sans-serif !important;
+}
+
+.brand-name-arabic,
+.slogan-arabic {
+  font-family: 'Noor', 'Arial', sans-serif !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-english);
+  background-color: var(--white);
+  color: var(--gray-900);
+  line-height: 1.5;
+}
+
+/* Mobile-first responsive design */
+.container {
+  max-width: 393px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
+}
+
+/* Arabic text support */
+.arabic {
+  font-family: var(--font-family-arabic);
+  direction: rtl;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+
+/* Backdrop filter support for glassmorphism */
+@supports (backdrop-filter: blur(20px)) {
+  .glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
