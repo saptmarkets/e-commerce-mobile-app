@@ -332,6 +332,19 @@ const CartBadge = styled.div`
 const CategoriesScreen = ({ onNavigate, onAddToCart, cartCount = 0 }) => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [currentScreen, setCurrentScreen] = React.useState('categories');
+
+  // Check for selected category from localStorage on mount
+  React.useEffect(() => {
+    const storedCategory = localStorage.getItem('selectedCategory');
+    if (storedCategory) {
+      const category = JSON.parse(storedCategory);
+      setSelectedCategory(category);
+      setCurrentScreen('category-products');
+      // Clear the stored category after using it
+      localStorage.removeItem('selectedCategory');
+    }
+  }, []);
+
   const navItems = [
     { icon: '🏠', label: 'الرئيسية', id: 'home' },
     { icon: '📂', label: 'التصنيفات', id: 'categories' },

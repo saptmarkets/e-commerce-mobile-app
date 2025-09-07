@@ -1163,7 +1163,11 @@ const HomeScreen = ({ onNavigate }) => {
                 transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => onNavigate && onNavigate(category.id)}
+                onClick={() => {
+                  setCurrentScreen('categories');
+                  // Store the selected category for CategoriesScreen to use
+                  localStorage.setItem('selectedCategory', JSON.stringify(category));
+                }}
               >
                 <CategoryStrip>
                   <CategoryName>{category.name}</CategoryName>
