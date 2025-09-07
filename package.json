@@ -12,11 +12,12 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emran-alhaddad/saudi-riyal-font": "^1.0.3",
+    "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "styled-components": "^6.0.7",
-    "framer-motion": "^10.16.4"
+    "styled-components": "^6.0.7"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^7.5.3",
@@ -27,9 +28,9 @@
     "@storybook/react": "^7.5.3",
     "@storybook/react-webpack5": "^7.5.3",
     "@storybook/testing-library": "^0.2.2",
-    "storybook": "^7.5.3",
     "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15"
+    "@types/react-dom": "^18.2.15",
+    "storybook": "^7.5.3"
   },
   "browserslist": {
     "production": [

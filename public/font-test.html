@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Font Test</title>
+    <link rel="stylesheet" href="/saudi-riyal-font.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .currency-test {
+            font-family: 'saudi_riyal' !important;
+            font-size: 32px;
+            color: #2E7D32;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .arabic-test {
+            font-family: 'saudi_riyal' !important;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .debug-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار خط السعودية الجديد</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: CSS Class Approach (.icon-saudi_riyal)</h2>
+        <div class="currency-test">
+            <span class="icon-saudi_riyal"></span> 150.00
+        </div>
+        <div class="debug-info">Font: saudi_riyal | CSS class: .icon-saudi_riyal</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Alternative CSS Class (.saudi-currency)</h2>
+        <div class="currency-test">
+            <span class="saudi-currency"></span> 250.00
+        </div>
+        <div class="debug-info">Font: saudi_riyal | CSS class: .saudi-currency</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Direct Unicode (should work now)</h2>
+        <div class="currency-test">\uE900 150.00</div>
+        <div class="debug-info">Font: saudi_riyal | Unicode: \uE900</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Arabic Text</h2>
+        <div class="arabic-test">نص تجريبي بالخط السعودي الجديد</div>
+        <div class="debug-info">Font: saudi_riyal | Arabic text</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Font Loading Status</h2>
+        <div id="font-status">Checking font loading...</div>
+        <div class="debug-info">
+            <div>Font files should be loaded from /fonts/ directory</div>
+            <div>CSS file: /saudi-riyal-font.css</div>
+        </div>
+    </div>
+
+    <script>
+        // Check if font is loaded
+        document.fonts.ready.then(() => {
+            const saudiFont = document.fonts.check('16px saudi_riyal');
+            document.getElementById('font-status').innerHTML = 
+                saudiFont ? '✅ Saudi font loaded successfully!' : '❌ Saudi font not loaded';
+        });
+
+        // Debug: Log font families
+        console.log('Available fonts:', document.fonts);
+    </script>
+</body>
+</html>

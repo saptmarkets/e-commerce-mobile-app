@@ -1,38 +1,55 @@
-/* Saudi Riyal Font - Public CSS */
+/* Saudi Riyal Font - Using npm package approach */
 @font-face {
   font-family: 'saudi_riyal';
-  src: url('/fonts/saudi_riyal.eot');
-  src: url('/fonts/saudi_riyal.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/saudi_riyal.woff2') format('woff2'),
-       url('/fonts/saudi_riyal.woff') format('woff'),
-       url('/fonts/saudi_riyal.ttf') format('truetype'),
-       url('/fonts/saudi_riyal.svg#saudi_riyal') format('svg');
+  src: url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.woff2') format('woff2'),
+       url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.woff') format('woff'),
+       url('../node_modules/@emran-alhaddad/saudi-riyal-font/fonts/saudi_riyal.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: block;
-  unicode-range: U+E900;
 }
 
-/* Force the private use area character to use our font */
-@font-face {
-  font-family: 'Open Sans';
-  src: local('saudi_riyal');
-  unicode-range: U+E900;
+/* Ensure the icon class correctly loads the Riyal symbol */
+.icon-saudi_riyal::before {
+  content: "\e900";
+  font-family: 'saudi_riyal' !important;
+  font-size: inherit;
+  color: inherit;
 }
 
-/* Ensure any element with the currency character uses our font */
-body {
-  font-family: 'Open Sans', 'saudi_riyal', sans-serif;
+/* Alternative approach for direct usage */
+.saudi-currency {
+  font-family: 'saudi_riyal' !important;
 }
 
-/* Target specific elements that might contain currency */
-span:not(:empty),
-div:not(:empty),
-p:not(:empty) {
-  font-family: inherit;
+.saudi-currency::before {
+  content: "\e900";
+  font-family: 'saudi_riyal' !important;
 }
 
-/* Debug style - remove this after testing */
+/* Debug styles - remove these after testing */
 .font-saudi_riyal {
   font-family: 'saudi_riyal' !important;
+}
+
+/* Test currency symbol specifically */
+.currency-test {
+  font-family: 'saudi_riyal' !important;
+  font-size: 24px;
+  color: #2E7D32;
+  font-weight: bold;
+}
+
+/* Debug: Show when font is loaded */
+body::after {
+  content: "Saudi Font CSS Loaded";
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  opacity: 0.8;
 }
