@@ -170,35 +170,25 @@ const SearchSection = styled(motion.div)`
 `;
 
 // Banner Section
-const BannerSection = styled(motion.div)`
-  background: url('/banner1.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+const BannerSection = styled(motion.div).attrs(props => ({
+  style: {
+    backgroundImage: `url(${props.bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }
+}))`
   border-radius: 20px;
-  padding: 60px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
   height: 200px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+  background: #eee; /* fallback while image loads */
+  flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
-const BannerImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background: url('/banner1.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 20px;
-  position: relative;
-`;
 
 const BannerContent = styled.div`
   position: absolute;
@@ -207,37 +197,37 @@ const BannerContent = styled.div`
   right: 0;
   bottom: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  border-radius: 20px;
   padding: 20px;
   z-index: 2;
 `;
 
 const BannerText = styled.div`
-  flex: 1;
   text-align: center;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  color: white;
 `;
 
 const BannerTitle = styled.div`
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   font-family: ${theme.typography.fontFamily.arabic};
   margin-bottom: 8px;
   direction: rtl;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const BannerSubtitle = styled.div`
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
   font-family: ${theme.typography.fontFamily.arabic};
   direction: rtl;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const BannerIcon = styled.div`
@@ -765,6 +755,25 @@ const DiscountPercent = styled.div`
 `;
 
 const HomeScreen = ({ onNavigate }) => {
+  const bannerImages = ['/banner1.png', '/banner2.jpg'];
+  const bannerTexts = [
+    {
+      title: 'تطبيق جديد',
+      subtitle: 'اكتشف تجربة تسوق حديثة ومتطورة'
+    },
+    {
+      title: 'أفضل العروض',
+      subtitle: 'خصومات حصرية على جميع المنتجات'
+    }
+  ];
+  const [bannerIndex, setBannerIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      setBannerIndex((prev) => (prev + 1) % bannerImages.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [isProductModalOpen, setIsProductModalOpen] = React.useState(false);
@@ -1125,15 +1134,18 @@ const HomeScreen = ({ onNavigate }) => {
 
                  {/* Banner Section */}
          <BannerSection
+           bgImage={bannerImages[bannerIndex]}
+           key={bannerImages[bannerIndex]}
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.6, delay: 0.3 }}
          >
-           <BannerText>
-             <BannerTitle>عروض خاصة اليوم!</BannerTitle>
-             <BannerSubtitle>احصل على خصم 20% على جميع المنتجات</BannerSubtitle>
-           </BannerText>
-           <BannerIcon>🎉</BannerIcon>
+           <BannerContent>
+             <BannerText>
+               <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
+               <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
+             </BannerText>
+           </BannerContent>
          </BannerSection>
 
         {/* Quick Actions */}
