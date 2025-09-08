@@ -170,7 +170,14 @@ const SearchSection = styled(motion.div)`
 `;
 
 // Banner Section
-const BannerContainer = styled.div`
+const BannerSection = styled(motion.div).attrs(props => ({
+  style: {
+    backgroundImage: `url(${props.bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }
+}))`
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -182,43 +189,8 @@ const BannerContainer = styled.div`
   flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
-const BannerSlider = styled(motion.div)`
-  display: flex;
-  width: 200%; /* Double width to accommodate both images */
-  height: 100%;
-  will-change: transform;
-  gap: 0; /* avoid any gaps between slides */
-`;
 
-const BannerSection = styled(motion.div)`
-  width: 100%; /* Each slide equals container width */
-  flex: 0 0 100%; /* Prevent shrinking to keep exact width */
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #ddd; /* fallback */
-`;
-
-const BannerItem = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-`;
-
-const BannerImg = styled.img`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  user-select: none;
-  -webkit-user-drag: none;
-`;
-
-const BannerContent = styled(motion.div)`
+const BannerContent = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -783,7 +755,7 @@ const DiscountPercent = styled.div`
 `;
 
 const HomeScreen = ({ onNavigate }) => {
-  const bannerImages = ['/banner1.png', '/banner2.jpg', '/banner1.png'];
+  const bannerImages = ['/banner1.png', '/banner2.jpg'];
   const bannerTexts = [
     {
       title: 'تطبيق جديد',
@@ -792,10 +764,6 @@ const HomeScreen = ({ onNavigate }) => {
     {
       title: 'أفضل العروض',
       subtitle: 'خصومات حصرية على جميع المنتجات'
-    },
-    {
-      title: 'تطبيق جديد',
-      subtitle: 'تجربة أكثر سلاسة مع عروض مستمرة'
     }
   ];
   const [bannerIndex, setBannerIndex] = React.useState(0);
@@ -803,7 +771,7 @@ const HomeScreen = ({ onNavigate }) => {
   React.useEffect(() => {
     const id = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 4000); // Back to 4 seconds for faster cycling
+    }, 6000); // Increased from 4000ms to 6000ms for slower transitions
     return () => clearInterval(id);
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -1165,41 +1133,32 @@ const HomeScreen = ({ onNavigate }) => {
         </SearchSection>
 
                  {/* Banner Section */}
-         <BannerContainer>
-          <BannerSlider
-            style={{ width: `${bannerImages.length * 100}%` }}
-            animate={{ x: `-${(100 / bannerImages.length) * bannerIndex}%` }}
-            transition={{ 
-              duration: 1.0, 
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
-          >
-            {bannerImages.map((image, index) => (
-              <BannerSection
-                key={index}
-                style={{ backgroundImage: `url(${image})` }}
-              >
-                <BannerItem>
-                  <BannerImg src={image} alt={`banner-${index + 1}`} />
-                  <BannerContent
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.8, 
-                      delay: 0.5,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }}
-                  >
-                    <BannerText>
-                      <BannerTitle>{bannerTexts[index].title}</BannerTitle>
-                      <BannerSubtitle>{bannerTexts[index].subtitle}</BannerSubtitle>
-                    </BannerText>
-                  </BannerContent>
-                </BannerItem>
-              </BannerSection>
-            ))}
-          </BannerSlider>
-         </BannerContainer>
+         <BannerSection
+           bgImage={bannerImages[bannerIndex]}
+           key={bannerImages[bannerIndex]}
+           initial={{ opacity: 0, scale: 0.95, y: 10 }}
+           animate={{ opacity: 1, scale: 1, y: 0 }}
+           transition={{ 
+             duration: 1.2, 
+             delay: 0.3,
+             ease: [0.25, 0.46, 0.45, 0.94]
+           }}
+         >
+           <BannerContent
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ 
+               duration: 0.8, 
+               delay: 0.8,
+               ease: [0.25, 0.46, 0.45, 0.94]
+             }}
+           >
+             <BannerText>
+               <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
+               <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
+             </BannerText>
+           </BannerContent>
+         </BannerSection>
 
         {/* Quick Actions */}
         <QuickActions
