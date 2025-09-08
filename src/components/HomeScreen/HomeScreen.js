@@ -771,7 +771,7 @@ const HomeScreen = ({ onNavigate }) => {
   React.useEffect(() => {
     const id = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 4000);
+    }, 6000); // Increased from 4000ms to 6000ms for slower transitions
     return () => clearInterval(id);
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -1136,11 +1136,23 @@ const HomeScreen = ({ onNavigate }) => {
          <BannerSection
            bgImage={bannerImages[bannerIndex]}
            key={bannerImages[bannerIndex]}
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.6, delay: 0.3 }}
+           initial={{ opacity: 0, scale: 0.95, y: 10 }}
+           animate={{ opacity: 1, scale: 1, y: 0 }}
+           transition={{ 
+             duration: 1.2, 
+             delay: 0.3,
+             ease: [0.25, 0.46, 0.45, 0.94]
+           }}
          >
-           <BannerContent>
+           <BannerContent
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ 
+               duration: 0.8, 
+               delay: 0.8,
+               ease: [0.25, 0.46, 0.45, 0.94]
+             }}
+           >
              <BannerText>
                <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
                <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
