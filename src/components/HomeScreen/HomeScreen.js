@@ -1137,9 +1137,9 @@ const HomeScreen = ({ onNavigate }) => {
            <BannerSection
              bgImage={bannerImages[bannerIndex]}
              key={bannerImages[bannerIndex]}
-             initial={{ x: 40, opacity: 0 }}
-             animate={{ x: 0, opacity: 1 }}
-             exit={{ x: -40, opacity: 0 }}
+             initial={{ x: 40 }}
+             animate={{ x: 0 }}
+             exit={{ x: -40 }}
              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
            >
              <BannerContent>
