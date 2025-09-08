@@ -372,10 +372,10 @@ const FeatureCardGlass = styled(motion.div)`
       transform: scale(1.1) rotate(5deg);
     }
     .feature-title {
-      color: #74bd43;
+      color: #8e24aa;
     }
     .feature-subtitle {
-      color: #74308c;
+      color: #8e24aa;
     }
   }
 `;
@@ -400,7 +400,7 @@ const FeatureIcon = styled.div`
 const FeatureTitle = styled.div`
   font-size: 0.85rem;
   font-weight: 700;
-  color: #74bd43;
+  color: #74308c;
   margin-bottom: 6px;
   font-family: ${theme.typography.fontFamily.arabic};
   line-height: 1.2;
@@ -412,7 +412,7 @@ const FeatureTitle = styled.div`
 const FeatureSubtitle = styled.div`
   font-size: 0.85rem;
   font-weight: 700;
-  color: #74bd43;
+  color: #74308c;
   font-family: ${theme.typography.fontFamily.arabic};
   line-height: 1.2;
   max-width: 100%;
