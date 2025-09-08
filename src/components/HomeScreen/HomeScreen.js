@@ -191,8 +191,8 @@ const BannerSlider = styled(motion.div)`
 `;
 
 const BannerSection = styled(motion.div)`
-  width: 50%; /* Each banner takes half the slider width */
-  flex: 0 0 50%; /* Prevent shrinking to keep exact width */
+  width: 100%; /* Each slide equals container width */
+  flex: 0 0 100%; /* Prevent shrinking to keep exact width */
   height: 100%;
   position: relative;
   background-size: cover;
@@ -201,7 +201,7 @@ const BannerSection = styled(motion.div)`
   background-color: #ddd; /* fallback */
 `;
 
-const BannerItem = styled(motion.div)`
+const BannerItem = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
@@ -1177,11 +1177,7 @@ const HomeScreen = ({ onNavigate }) => {
             {bannerImages.map((image, index) => (
               <BannerSection
                 key={index}
-                style={{
-                  width: `${100 / bannerImages.length}%`,
-                  flex: `0 0 ${100 / bannerImages.length}%`,
-                  backgroundImage: `url(${image})`
-                }}
+                style={{ backgroundImage: `url(${image})` }}
               >
                 <BannerItem>
                   <BannerImg src={image} alt={`banner-${index + 1}`} />
