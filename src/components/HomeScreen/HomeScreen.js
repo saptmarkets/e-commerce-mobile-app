@@ -197,6 +197,17 @@ const BannerSection = styled(motion.div)`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #ddd; /* fallback */
+`;
+
+const BannerImg = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 `;
 
 const BannerContent = styled(motion.div)`
@@ -1155,6 +1166,7 @@ const HomeScreen = ({ onNavigate }) => {
                  key={index}
                  style={{ backgroundImage: `url(${image})` }}
                >
+                <BannerImg src={image} alt={`banner-${index + 1}`} />
                  <BannerContent
                    initial={{ opacity: 0, y: 20 }}
                    animate={{ opacity: 1, y: 0 }}
