@@ -29,7 +29,7 @@ const LogoBackdrop = styled(motion.div)`
   filter: blur(0.5px);
 `;
 
-const LogoImage = styled.img`
+const LogoImage = styled(motion.img)`
   width: 250px;
   height: 250px;
   object-fit: contain;
@@ -72,6 +72,9 @@ const SplashScreen = ({ onDone }) => {
       <LogoImage
         src="/logo sapt white.png"
         alt="SAPT Logo"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
       />
       
       <Center>
