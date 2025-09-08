@@ -379,10 +379,16 @@ const ProductDetails = ({ product, isOpen, onClose, onAddToCart, onBuyNow }) => 
           </ProductDescription>
 
           <PriceSection>
-            <CurrentPrice>{currentPrice} ريال</CurrentPrice>
+            <CurrentPrice>
+              <span className="font-saudi_riyal">{'\uE900'}</span>
+              {` ${currentPrice}`}
+            </CurrentPrice>
             {product.originalPrice && (
               <>
-                <OriginalPrice>{product.originalPrice} ريال</OriginalPrice>
+                <OriginalPrice>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${product.originalPrice}`}
+                </OriginalPrice>
                 <DiscountBadge>
                   خصم {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
                 </DiscountBadge>
@@ -403,7 +409,8 @@ const ProductDetails = ({ product, isOpen, onClose, onAddToCart, onBuyNow }) => 
                 >
                   <div>{unitOption.label}</div>
                   <UnitPrice active={selectedUnit === unitOption.unit}>
-                    {unitOption.price.toFixed(2)} ريال
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${unitOption.price.toFixed(2)}`}
                   </UnitPrice>
                 </UnitTab>
               ))}
