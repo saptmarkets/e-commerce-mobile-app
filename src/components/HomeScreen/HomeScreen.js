@@ -187,6 +187,7 @@ const BannerSlider = styled(motion.div)`
   width: 200%; /* Double width to accommodate both images */
   height: 100%;
   will-change: transform;
+  gap: 0; /* avoid any gaps between slides */
 `;
 
 const BannerSection = styled(motion.div)`
@@ -198,6 +199,13 @@ const BannerSection = styled(motion.div)`
   background-position: center;
   background-repeat: no-repeat;
   background-color: #ddd; /* fallback */
+`;
+
+const BannerItem = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 `;
 
 const BannerImg = styled.img`
@@ -1166,8 +1174,9 @@ const HomeScreen = ({ onNavigate }) => {
                  key={index}
                  style={{ backgroundImage: `url(${image})` }}
                >
-                <BannerImg src={image} alt={`banner-${index + 1}`} />
-                 <BannerContent
+                <BannerItem>
+                  <BannerImg src={image} alt={`banner-${index + 1}`} />
+                  <BannerContent
                    initial={{ opacity: 0, y: 20 }}
                    animate={{ opacity: 1, y: 0 }}
                    transition={{ 
@@ -1175,12 +1184,13 @@ const HomeScreen = ({ onNavigate }) => {
                      delay: 0.5,
                      ease: [0.25, 0.46, 0.45, 0.94]
                    }}
-                 >
-                   <BannerText>
-                     <BannerTitle>{bannerTexts[index].title}</BannerTitle>
-                     <BannerSubtitle>{bannerTexts[index].subtitle}</BannerSubtitle>
-                   </BannerText>
-                 </BannerContent>
+                  >
+                    <BannerText>
+                      <BannerTitle>{bannerTexts[index].title}</BannerTitle>
+                      <BannerSubtitle>{bannerTexts[index].subtitle}</BannerSubtitle>
+                    </BannerText>
+                  </BannerContent>
+                </BannerItem>
                </BannerSection>
              ))}
            </BannerSlider>
