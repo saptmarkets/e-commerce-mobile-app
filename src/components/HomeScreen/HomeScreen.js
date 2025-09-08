@@ -783,7 +783,7 @@ const DiscountPercent = styled.div`
 `;
 
 const HomeScreen = ({ onNavigate }) => {
-  const bannerImages = ['/banner1.png', '/banner2.jpg'];
+  const bannerImages = ['/banner1.png', '/banner2.jpg', '/banner1.png'];
   const bannerTexts = [
     {
       title: 'تطبيق جديد',
@@ -792,6 +792,10 @@ const HomeScreen = ({ onNavigate }) => {
     {
       title: 'أفضل العروض',
       subtitle: 'خصومات حصرية على جميع المنتجات'
+    },
+    {
+      title: 'تطبيق جديد',
+      subtitle: 'تجربة أكثر سلاسة مع عروض مستمرة'
     }
   ];
   const [bannerIndex, setBannerIndex] = React.useState(0);
@@ -1162,28 +1166,33 @@ const HomeScreen = ({ onNavigate }) => {
 
                  {/* Banner Section */}
          <BannerContainer>
-           <BannerSlider
-             animate={{ x: bannerIndex === 0 ? '0%' : '-50%' }}
-             transition={{ 
-               duration: 1.0, 
-               ease: [0.25, 0.46, 0.45, 0.94]
-             }}
-           >
-             {bannerImages.map((image, index) => (
-               <BannerSection
-                 key={index}
-                 style={{ backgroundImage: `url(${image})` }}
-               >
+          <BannerSlider
+            style={{ width: `${bannerImages.length * 100}%` }}
+            animate={{ x: `-${(100 / bannerImages.length) * bannerIndex}%` }}
+            transition={{ 
+              duration: 1.0, 
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+          >
+            {bannerImages.map((image, index) => (
+              <BannerSection
+                key={index}
+                style={{
+                  width: `${100 / bannerImages.length}%`,
+                  flex: `0 0 ${100 / bannerImages.length}%`,
+                  backgroundImage: `url(${image})`
+                }}
+              >
                 <BannerItem>
                   <BannerImg src={image} alt={`banner-${index + 1}`} />
                   <BannerContent
-                   initial={{ opacity: 0, y: 20 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ 
-                     duration: 0.8, 
-                     delay: 0.5,
-                     ease: [0.25, 0.46, 0.45, 0.94]
-                   }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.8, 
+                      delay: 0.5,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
                   >
                     <BannerText>
                       <BannerTitle>{bannerTexts[index].title}</BannerTitle>
@@ -1191,9 +1200,9 @@ const HomeScreen = ({ onNavigate }) => {
                     </BannerText>
                   </BannerContent>
                 </BannerItem>
-               </BannerSection>
-             ))}
-           </BannerSlider>
+              </BannerSection>
+            ))}
+          </BannerSlider>
          </BannerContainer>
 
         {/* Quick Actions */}
