@@ -170,14 +170,7 @@ const SearchSection = styled(motion.div)`
 `;
 
 // Banner Section
-const BannerSection = styled(motion.div).attrs(props => ({
-  style: {
-    backgroundImage: `url(${props.bgImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }
-}))`
+const BannerContainer = styled.div`
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -187,6 +180,25 @@ const BannerSection = styled(motion.div).attrs(props => ({
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: #eee; /* fallback while image loads */
   flex-shrink: 0; /* Prevent banner from shrinking */
+`;
+
+const BannerSlider = styled(motion.div)`
+  display: flex;
+  width: 200%; /* Double width to accommodate both images */
+  height: 100%;
+`;
+
+const BannerSection = styled(motion.div).attrs(props => ({
+  style: {
+    backgroundImage: `url(${props.bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }
+}))`
+  width: 50%; /* Each banner takes half the slider width */
+  height: 100%;
+  position: relative;
 `;
 
 
@@ -771,7 +783,7 @@ const HomeScreen = ({ onNavigate }) => {
   React.useEffect(() => {
     const id = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 6000); // Increased from 4000ms to 6000ms for slower transitions
+    }, 4000); // Back to 4 seconds for faster cycling
     return () => clearInterval(id);
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -1133,32 +1145,29 @@ const HomeScreen = ({ onNavigate }) => {
         </SearchSection>
 
                  {/* Banner Section */}
-         <BannerSection
-           bgImage={bannerImages[bannerIndex]}
-           key={bannerImages[bannerIndex]}
-           initial={{ opacity: 0, scale: 0.95, y: 10 }}
-           animate={{ opacity: 1, scale: 1, y: 0 }}
-           transition={{ 
-             duration: 1.2, 
-             delay: 0.3,
-             ease: [0.25, 0.46, 0.45, 0.94]
-           }}
-         >
-           <BannerContent
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
+         <BannerContainer>
+           <BannerSlider
+             animate={{ x: bannerIndex === 0 ? '0%' : '-50%' }}
              transition={{ 
-               duration: 0.8, 
-               delay: 0.8,
+               duration: 1.0, 
                ease: [0.25, 0.46, 0.45, 0.94]
              }}
            >
-             <BannerText>
-               <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
-               <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
-             </BannerText>
-           </BannerContent>
-         </BannerSection>
+             {bannerImages.map((image, index) => (
+               <BannerSection
+                 key={index}
+                 bgImage={image}
+               >
+                 <BannerContent>
+                   <BannerText>
+                     <BannerTitle>{bannerTexts[index].title}</BannerTitle>
+                     <BannerSubtitle>{bannerTexts[index].subtitle}</BannerSubtitle>
+                   </BannerText>
+                 </BannerContent>
+               </BannerSection>
+             ))}
+           </BannerSlider>
+         </BannerContainer>
 
         {/* Quick Actions */}
         <QuickActions
