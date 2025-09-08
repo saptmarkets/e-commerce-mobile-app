@@ -178,7 +178,6 @@ const BannerContainer = styled.div`
   height: 200px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background: #eee; /* fallback while image loads */
   flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
@@ -186,6 +185,7 @@ const BannerSlider = styled(motion.div)`
   display: flex;
   width: 200%; /* Double width to accommodate both images */
   height: 100%;
+  will-change: transform;
 `;
 
 const BannerSection = styled(motion.div).attrs(props => ({
@@ -197,8 +197,10 @@ const BannerSection = styled(motion.div).attrs(props => ({
   }
 }))`
   width: 50%; /* Each banner takes half the slider width */
+  flex: 0 0 50%; /* Prevent shrinking to keep exact width */
   height: 100%;
   position: relative;
+  background-color: #eee; /* visible while image loads */
 `;
 
 
