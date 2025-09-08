@@ -30,9 +30,17 @@ const LogoBackdrop = styled(motion.div)`
 `;
 
 const LogoImage = styled(motion.img)`
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
+  position: absolute;
+  top: 80px;
+`;
+
+const CartIcon = styled(motion.svg)`
+  width: 80px;
+  height: 80px;
+  color: #fff;
 `;
 
 const AppName = styled(motion.div)`
@@ -59,25 +67,37 @@ const SplashScreen = ({ onDone }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
+      <LogoImage
+        src="/logo sapt white.png"
+        alt="SAPT Logo"
+        initial={{ scale: 0.5, opacity: 0, y: -50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+      />
+      
       <Center>
         <LogoBackdrop
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1.15, opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
+          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
         />
 
-        <LogoImage
-          src="/logo sapt white.png"
-          alt="SAPT Logo"
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.25 }}
-        />
+        <CartIcon
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          initial={{ x: -200, rotate: -8, opacity: 0 }}
+          animate={{ x: 0, rotate: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
+        >
+          <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM7.16 14.26l.03.01L19 14c.75 0 1.41-.41 1.75-1.03l3.58-6.49a1 1 0 00-.88-1.48H6.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 0-.25-.11-.25-.25 0-.04.01-.09.03-.12l.96-1.37z" fill="currentColor"/>
+        </CartIcon>
       </Center>
+      
       <AppName
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
       >
         أسواق سبت المركزية
       </AppName>
