@@ -674,7 +674,10 @@ const CategoryProducts = ({ categoryId, categoryName, onNavigate, onAddToCart, c
               >
                 <ProductEmoji>{product.emoji}</ProductEmoji>
                 <ProductName>{product.name}</ProductName>
-                <ProductPrice>{product.price} ريال</ProductPrice>
+                <ProductPrice>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${product.price}`}
+                </ProductPrice>
                 <ProductAddButton
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}

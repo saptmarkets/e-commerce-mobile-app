@@ -47,31 +47,31 @@
     <h1>اختبار خط السعودية الجديد</h1>
     
     <div class="test-section">
-        <h2>Test 1: CSS Class Approach (.icon-saudi_riyal)</h2>
+        <h2>Test 1: Customer App Approach (Direct Unicode)</h2>
+        <div class="currency-test">\uE900 150.00</div>
+        <div class="debug-info">Font: saudi_riyal | Unicode: \uE900 (Customer App Method)</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Customer App Approach (Theme Currency)</h2>
+        <div class="currency-test" id="theme-currency">Loading...</div>
+        <div class="debug-info">Font: saudi_riyal | From theme.typography.currency.saudiRiyal</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Icon Class Approach</h2>
         <div class="currency-test">
-            <span class="icon-saudi_riyal"></span> 150.00
+            <span class="icon-saudi_riyal"></span> 250.00
         </div>
         <div class="debug-info">Font: saudi_riyal | CSS class: .icon-saudi_riyal</div>
     </div>
 
     <div class="test-section">
-        <h2>Test 2: Alternative CSS Class (.saudi-currency)</h2>
+        <h2>Test 4: Font Class with Currency</h2>
         <div class="currency-test">
-            <span class="saudi-currency"></span> 250.00
+            <span class="font-saudi_riyal">\uE900</span> 150.00
         </div>
-        <div class="debug-info">Font: saudi_riyal | CSS class: .saudi-currency</div>
-    </div>
-
-    <div class="test-section">
-        <h2>Test 3: Direct Unicode (should work now)</h2>
-        <div class="currency-test">\uE900 150.00</div>
-        <div class="debug-info">Font: saudi_riyal | Unicode: \uE900</div>
-    </div>
-
-    <div class="test-section">
-        <h2>Test 4: Arabic Text</h2>
-        <div class="arabic-test">نص تجريبي بالخط السعودي الجديد</div>
-        <div class="debug-info">Font: saudi_riyal | Arabic text</div>
+        <div class="debug-info">Font: saudi_riyal | CSS class: .font-saudi_riyal with currency</div>
     </div>
 
     <div class="test-section">
@@ -93,6 +93,14 @@
 
         // Debug: Log font families
         console.log('Available fonts:', document.fonts);
+
+        // Simulate theme currency (like customer app)
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeCurrency = document.getElementById('theme-currency');
+            if (themeCurrency) {
+                themeCurrency.innerHTML = '\uE900 150.00';
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standalone Saudi Font Test</title>
+    <style>
+        /* Saudi Riyal Font - Inline CSS */
+        @font-face {
+          font-family: 'saudi_riyal';
+          src: url('./fonts/saudi_riyal.eot');
+          src: url('./fonts/saudi_riyal.eot?#iefix') format('embedded-opentype'),
+               url('./fonts/saudi_riyal.woff2') format('woff2'),
+               url('./fonts/saudi_riyal.woff') format('woff'),
+               url('./fonts/saudi_riyal.ttf') format('truetype'),
+               url('./fonts/saudi_riyal.svg#saudi_riyal') format('svg');
+          font-weight: normal;
+          font-style: normal;
+          font-display: block;
+          unicode-range: U+E900;
+        }
+
+        /* Force the private use area character to use our font */
+        @font-face {
+          font-family: 'Open Sans';
+          src: local('saudi_riyal');
+          unicode-range: U+E900;
+        }
+
+        /* Ensure any element with the currency character uses our font */
+        body {
+          font-family: 'Open Sans', 'saudi_riyal', sans-serif;
+        }
+
+        /* Debug style */
+        .font-saudi_riyal {
+          font-family: 'saudi_riyal' !important;
+        }
+
+        /* Icon class for empty spans */
+        .icon-saudi_riyal::before {
+          content: "\e900";
+          font-family: 'saudi_riyal' !important;
+        }
+
+        /* Test styles */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .currency-test {
+            font-size: 32px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 15px;
+            background: #f0f8f0;
+            border-radius: 4px;
+            border: 2px solid #4CAF50;
+        }
+        .debug-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            background: #f9f9f9;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Standalone Saudi Font Test</h1>
+    <p>This test uses inline CSS and relative font paths to avoid any server issues.</p>
+    
+    <div class="test-container">
+        <h2>Test 1: Direct Unicode with Font Family</h2>
+        <div class="currency-test" style="font-family: 'saudi_riyal', Arial, sans-serif;">&#xE900; 150.00</div>
+        <div class="debug-info">Direct unicode: &#xE900; with font-family: 'saudi_riyal'</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 2: CSS Class Approach</h2>
+        <div class="currency-test">
+            <span class="font-saudi_riyal">&#xE900;</span> 150.00
+        </div>
+        <div class="debug-info">CSS class: .font-saudi_riyal with unicode</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 3: Icon Class (Empty Span)</h2>
+        <div class="currency-test">
+            <span class="icon-saudi_riyal"></span> 150.00
+        </div>
+        <div class="debug-info">CSS class: .icon-saudi_riyal (empty span with ::before)</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 4: Body Font Inheritance</h2>
+        <div class="currency-test">&#xE900; 150.00</div>
+        <div class="debug-info">Using body font-family inheritance</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Font Loading Status</h2>
+        <div id="font-status">Checking...</div>
+        <div class="debug-info">
+            <div>Font files: ./fonts/saudi_riyal.*</div>
+            <div>Unicode range: U+E900</div>
+        </div>
+    </div>
+
+    <script>
+        // Check font loading
+        document.fonts.ready.then(() => {
+            const saudiFont = document.fonts.check('16px saudi_riyal');
+            const status = document.getElementById('font-status');
+            
+            if (saudiFont) {
+                status.innerHTML = '<span class="success">✅ Saudi font loaded successfully!</span>';
+            } else {
+                status.innerHTML = '<span class="error">❌ Saudi font not loaded</span>';
+            }
+        });
+
+        // Debug: Log available fonts
+        setTimeout(() => {
+            console.log('Available fonts:', Array.from(document.fonts).map(f => f.family));
+            console.log('Saudi font check:', document.fonts.check('16px saudi_riyal'));
+        }, 1000);
+    </script>
+</body>
+</html>

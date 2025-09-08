@@ -1219,8 +1219,14 @@ const HomeScreen = ({ onNavigate }) => {
                   <MaxQty>الحد الأقصى: {offer.maxQty}</MaxQty>
                 </QuantityInfo>
                 <PriceContainer>
-                  <OldPrice>{offer.oldPrice} ريال</OldPrice>
-                  <NewPrice>{offer.newPrice} ريال</NewPrice>
+                  <OldPrice>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${offer.oldPrice}`}
+                  </OldPrice>
+                  <NewPrice>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${offer.newPrice}`}
+                  </NewPrice>
                 </PriceContainer>
                 <AddToCartButton
                   whileHover={{ scale: 1.1 }}
@@ -1272,7 +1278,10 @@ const HomeScreen = ({ onNavigate }) => {
                   <ProductEmoji>{product.emoji}</ProductEmoji>
                 </ProductImageSection>
                 <ProductName>{product.name}</ProductName>
-                <ProductPrice>{product.price} ريال</ProductPrice>
+                <ProductPrice>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${product.price}`}
+                </ProductPrice>
                 <ProductAddButton
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}

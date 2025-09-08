@@ -272,13 +272,19 @@ const CartScreen = ({ onNavigate, items = [], onIncrement, onDecrement, onRemove
               {items.map(item => (
                 <Row key={item.id}>
                   <Name>{item.name}</Name>
-                  <Price>{(item.unitPrice || 0).toFixed(2)} ريال</Price>
+                  <Price>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${(item.unitPrice || 0).toFixed(2)}`}
+                  </Price>
                   <QtyControls>
                     <IconButton whileTap={{ scale: 0.95 }} onClick={() => onDecrement && onDecrement(item.id)}>-</IconButton>
                     <Qty>{item.qty}</Qty>
                     <IconButton whileTap={{ scale: 0.95 }} onClick={() => onIncrement && onIncrement(item.id)}>+</IconButton>
                   </QtyControls>
-                  <LineTotal>{(item.qty * (item.unitPrice || 0)).toFixed(2)} ريال</LineTotal>
+                  <LineTotal>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${(item.qty * (item.unitPrice || 0)).toFixed(2)}`}
+                  </LineTotal>
                   <IconButton whileTap={{ scale: 0.95 }} onClick={() => onRemove && onRemove(item.id)}>×</IconButton>
                 </Row>
               ))}
@@ -291,7 +297,10 @@ const CartScreen = ({ onNavigate, items = [], onIncrement, onDecrement, onRemove
             >
               <TotalRow>
                 <TotalLabel>المجموع الكلي</TotalLabel>
-                <TotalAmount>{subtotal.toFixed(2)} ريال</TotalAmount>
+                <TotalAmount>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${subtotal.toFixed(2)}`}
+                </TotalAmount>
               </TotalRow>
               <CheckoutButton
                 whileHover={{ scale: 1.02 }}

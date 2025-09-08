@@ -672,8 +672,14 @@ const OffersScreen = ({ onNavigate, onAddToCart, cartCount = 0 }) => {
                   <MaxQty>الحد الأقصى: {offer.maxQty}</MaxQty>
                 </QuantityInfo>
                 <PriceContainer>
-                  <OldPrice>{offer.oldPrice} ريال</OldPrice>
-                  <NewPrice>{offer.newPrice} ريال</NewPrice>
+                  <OldPrice>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${offer.oldPrice}`}
+                  </OldPrice>
+                  <NewPrice>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${offer.newPrice}`}
+                  </NewPrice>
                 </PriceContainer>
                 <OfferAddButton
                   whileHover={{ scale: 1.1 }}

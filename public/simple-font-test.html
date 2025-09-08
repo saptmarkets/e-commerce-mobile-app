@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Saudi Font Test</title>
+    <link rel="stylesheet" href="/saudi-riyal-font.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .currency-test {
+            font-size: 24px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f8f0;
+            border-radius: 4px;
+        }
+        .debug-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .font-check {
+            font-family: 'saudi_riyal', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Saudi Font Test</h1>
+    
+    <div class="test-container">
+        <h2>Test 1: Direct Unicode</h2>
+        <div class="currency-test font-check">&#xE900; 150.00</div>
+        <div class="debug-info">Direct unicode: &#xE900;</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 2: With Font Family</h2>
+        <div class="currency-test" style="font-family: 'saudi_riyal', Arial, sans-serif;">&#xE900; 150.00</div>
+        <div class="debug-info">Font-family: 'saudi_riyal'</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 3: Icon Class</h2>
+        <div class="currency-test">
+            <span class="icon-saudi_riyal"></span> 150.00
+        </div>
+        <div class="debug-info">CSS class: .icon-saudi_riyal</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Font Loading Status</h2>
+        <div id="font-status">Checking...</div>
+        <div class="debug-info">
+            <div>CSS File: /saudi-riyal-font.css</div>
+            <div>Font Files: /fonts/saudi_riyal.*</div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>Font File Accessibility</h2>
+        <div id="file-status">Checking font files...</div>
+    </div>
+
+    <script>
+        // Check font loading
+        document.fonts.ready.then(() => {
+            const saudiFont = document.fonts.check('16px saudi_riyal');
+            document.getElementById('font-status').innerHTML = 
+                saudiFont ? '✅ Saudi font loaded!' : '❌ Saudi font not loaded';
+        });
+
+        // Check font file accessibility
+        const fontFiles = [
+            '/fonts/saudi_riyal.woff2',
+            '/fonts/saudi_riyal.woff',
+            '/fonts/saudi_riyal.ttf',
+            '/fonts/saudi_riyal.eot',
+            '/fonts/saudi_riyal.svg'
+        ];
+
+        const fileStatus = document.getElementById('file-status');
+        let loadedFiles = 0;
+
+        fontFiles.forEach(file => {
+            fetch(file, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        loadedFiles++;
+                        fileStatus.innerHTML += `<div style="color: green;">✅ ${file}</div>`;
+                    } else {
+                        fileStatus.innerHTML += `<div style="color: red;">❌ ${file} (${response.status})</div>`;
+                    }
+                })
+                .catch(error => {
+                    fileStatus.innerHTML += `<div style="color: red;">❌ ${file} (Error: ${error.message})</div>`;
+                });
+        });
+
+        // Debug info
+        console.log('Available fonts:', Array.from(document.fonts).map(f => f.family));
+    </script>
+</body>
+</html>

@@ -807,7 +807,10 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
               
               <ProductInfo>
                 <ProductName>{item.name}</ProductName>
-                <ProductPrice>{(item.unitPrice || 0).toFixed(2)} ريال</ProductPrice>
+                <ProductPrice>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${(item.unitPrice || 0).toFixed(2)}`}
+                </ProductPrice>
               </ProductInfo>
               
               <QuantityControls>
@@ -827,7 +830,8 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
               </QuantityControls>
               
               <LineTotal>
-                {(item.qty * (item.unitPrice || 0)).toFixed(2)} ريال
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${(item.qty * (item.unitPrice || 0)).toFixed(2)}`}
               </LineTotal>
               
               <RemoveButton
@@ -862,7 +866,7 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
           
           {couponDiscount > 0 && (
             <div style={{ color: '#74bd43', fontSize: '0.9rem', fontWeight: '600', textAlign: 'right', marginTop: '8px' }}>
-              تم تطبيق خصم {couponDiscount} ريال
+              تم تطبيق خصم <span className="font-saudi_riyal">{'\uE900'}</span>{` ${couponDiscount}`}
             </div>
           )}
         </Section>
@@ -904,7 +908,7 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
                     onChange={(e) => setUseLoyaltyPoints(e.target.checked)}
                   />
                   <CheckboxLabel htmlFor="useLoyalty">
-                    استخدام النقاط ({loyaltyPoints} نقطة = {loyaltyDiscount.toFixed(2)} ريال خصم)
+                    استخدام النقاط ({loyaltyPoints} نقطة = <span className="font-saudi_riyal">{'\uE900'}</span>{` ${loyaltyDiscount.toFixed(2)}`} خصم)
                   </CheckboxLabel>
                 </UseLoyaltyCheckbox>
               </>
@@ -940,12 +944,20 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
           <OrderSummary>
             <SummaryRow>
               <SummaryLabel>المجموع الفرعي</SummaryLabel>
-              <SummaryValue>{subtotal.toFixed(2)} ريال</SummaryValue>
+              <SummaryValue>
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${subtotal.toFixed(2)}`}
+              </SummaryValue>
             </SummaryRow>
             
             <SummaryRow>
               <SummaryLabel>رسوم التوصيل</SummaryLabel>
-              <SummaryValue>{deliveryFee === 0 ? 'مجاناً' : `${deliveryFee.toFixed(2)} ريال`}</SummaryValue>
+              <SummaryValue>{deliveryFee === 0 ? 'مجاناً' : (
+                <>
+                  <span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${deliveryFee.toFixed(2)}`}
+                </>
+              )}</SummaryValue>
             </SummaryRow>
             
             {(couponDiscount > 0 || loyaltyDiscount > 0) && <TotalSeparator />}
@@ -953,14 +965,20 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
             {couponDiscount > 0 && (
               <DiscountRow>
                 <DiscountLabel>خصم الكوبون</DiscountLabel>
-                <DiscountValue>-{couponDiscount.toFixed(2)} ريال</DiscountValue>
+                <DiscountValue>
+                  -<span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${couponDiscount.toFixed(2)}`}
+                </DiscountValue>
               </DiscountRow>
             )}
             
             {loyaltyDiscount > 0 && (
               <DiscountRow>
                 <DiscountLabel>خصم نقاط الولاء</DiscountLabel>
-                <DiscountValue>-{loyaltyDiscount.toFixed(2)} ريال</DiscountValue>
+                <DiscountValue>
+                  -<span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${loyaltyDiscount.toFixed(2)}`}
+                </DiscountValue>
               </DiscountRow>
             )}
             
@@ -968,7 +986,8 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
               <DiscountRow style={{ background: 'rgba(116, 189, 67, 0.15)', border: '2px solid rgba(116, 189, 67, 0.3)' }}>
                 <DiscountLabel style={{ fontWeight: '700', fontSize: '1rem' }}>إجمالي الخصومات</DiscountLabel>
                 <DiscountValue style={{ fontWeight: '700', fontSize: '1rem' }}>
-                  -{(couponDiscount + loyaltyDiscount).toFixed(2)} ريال
+                  -<span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${(couponDiscount + loyaltyDiscount).toFixed(2)}`}
                 </DiscountValue>
               </DiscountRow>
             )}
@@ -977,7 +996,10 @@ const CheckoutScreen = ({ onNavigate, cartItems = [], onPlaceOrder, onUpdateCart
             
             <SummaryRow>
               <SummaryLabel>المجموع الكلي</SummaryLabel>
-              <SummaryValue isTotal>{total.toFixed(2)} ريال</SummaryValue>
+              <SummaryValue isTotal>
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${total.toFixed(2)}`}
+              </SummaryValue>
             </SummaryRow>
           </OrderSummary>
 

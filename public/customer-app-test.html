@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer App Exact Match Test</title>
+    <link rel="stylesheet" href="/saudi-riyal-font.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .currency-test {
+            font-size: 32px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 15px;
+            background: #f0f8f0;
+            border-radius: 4px;
+            border: 2px solid #4CAF50;
+        }
+        .debug-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            background: #f9f9f9;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer App Exact Match Test</h1>
+    <p>Using the exact same CSS and font files as the customer app.</p>
+    
+    <div class="test-container">
+        <h2>Test 1: Customer App Method (Direct Unicode)</h2>
+        <div class="currency-test">&#xE900; 150.00</div>
+        <div class="debug-info">Direct unicode: &#xE900; (Customer App Approach)</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 2: Customer App Method (Theme Currency)</h2>
+        <div class="currency-test" id="theme-currency">Loading...</div>
+        <div class="debug-info">From theme.typography.currency.saudiRiyal</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 3: Font Class Method</h2>
+        <div class="currency-test">
+            <span class="font-saudi_riyal">&#xE900;</span> 150.00
+        </div>
+        <div class="debug-info">CSS class: .font-saudi_riyal with unicode</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Test 4: Body Inheritance</h2>
+        <div class="currency-test">&#xE900; 150.00</div>
+        <div class="debug-info">Using body font-family inheritance</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Font Loading Status</h2>
+        <div id="font-status">Checking...</div>
+        <div class="debug-info">
+            <div>CSS File: /saudi-riyal-font.css (Customer App Version)</div>
+            <div>Font Files: /fonts/saudi_riyal.* (Customer App Version)</div>
+            <div>Unicode Range: U+E900</div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate customer app currency logic
+        const customerAppCurrency = String.fromCharCode(0xE900); // This is what customer app uses
+        
+        // Set theme currency
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeCurrency = document.getElementById('theme-currency');
+            if (themeCurrency) {
+                themeCurrency.innerHTML = customerAppCurrency + ' 150.00';
+            }
+        });
+
+        // Check font loading
+        document.fonts.ready.then(() => {
+            const saudiFont = document.fonts.check('16px saudi_riyal');
+            const status = document.getElementById('font-status');
+            
+            if (saudiFont) {
+                status.innerHTML = '<span class="success">✅ Saudi font loaded successfully!</span>';
+            } else {
+                status.innerHTML = '<span class="error">❌ Saudi font not loaded</span>';
+            }
+        });
+
+        // Debug info
+        setTimeout(() => {
+            console.log('Available fonts:', Array.from(document.fonts).map(f => f.family));
+            console.log('Saudi font check:', document.fonts.check('16px saudi_riyal'));
+            console.log('Customer app currency:', customerAppCurrency);
+        }, 1000);
+    </script>
+</body>
+</html>

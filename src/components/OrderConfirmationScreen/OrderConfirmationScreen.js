@@ -414,12 +414,13 @@ const OrderConfirmationScreen = ({ onNavigate, orderData }) => {
               <ProductInfo>
                 <ProductName>{item.name}</ProductName>
                 <ProductDetails>
-                  الكمية: {item.qty} × {(item.unitPrice || 0).toFixed(2)} ريال
+                  الكمية: {item.qty} × <span className="font-saudi_riyal">{'\uE900'}</span>{` ${(item.unitPrice || 0).toFixed(2)}`}
                 </ProductDetails>
               </ProductInfo>
               
               <ProductTotal>
-                {(item.qty * (item.unitPrice || 0)).toFixed(2)} ريال
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${(item.qty * (item.unitPrice || 0)).toFixed(2)}`}
               </ProductTotal>
             </ProductItem>
           ))}
@@ -427,13 +428,21 @@ const OrderConfirmationScreen = ({ onNavigate, orderData }) => {
           <OrderSummary>
             <SummaryRow>
               <SummaryLabel>المجموع الفرعي</SummaryLabel>
-              <SummaryValue>{(orderData?.subtotal || 0).toFixed(2)} ريال</SummaryValue>
+              <SummaryValue>
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${(orderData?.subtotal || 0).toFixed(2)}`}
+              </SummaryValue>
             </SummaryRow>
             
             <SummaryRow>
               <SummaryLabel>رسوم التوصيل</SummaryLabel>
               <SummaryValue>
-                {(orderData?.deliveryFee || 0) === 0 ? 'مجاناً' : `${(orderData?.deliveryFee || 0).toFixed(2)} ريال`}
+                {(orderData?.deliveryFee || 0) === 0 ? 'مجاناً' : (
+                  <>
+                    <span className="font-saudi_riyal">{'\uE900'}</span>
+                    {` ${(orderData?.deliveryFee || 0).toFixed(2)}`}
+                  </>
+                )}
               </SummaryValue>
             </SummaryRow>
             
@@ -441,7 +450,8 @@ const OrderConfirmationScreen = ({ onNavigate, orderData }) => {
               <SummaryRow>
                 <SummaryLabel>خصم الكوبون</SummaryLabel>
                 <SummaryValue style={{ color: '#74bd43' }}>
-                  -{(orderData?.couponDiscount || 0).toFixed(2)} ريال
+                  -<span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${(orderData?.couponDiscount || 0).toFixed(2)}`}
                 </SummaryValue>
               </SummaryRow>
             )}
@@ -450,14 +460,18 @@ const OrderConfirmationScreen = ({ onNavigate, orderData }) => {
               <SummaryRow>
                 <SummaryLabel>خصم نقاط الولاء</SummaryLabel>
                 <SummaryValue style={{ color: '#74bd43' }}>
-                  -{(orderData?.loyaltyDiscount || 0).toFixed(2)} ريال
+                  -<span className="font-saudi_riyal">{'\uE900'}</span>
+                  {` ${(orderData?.loyaltyDiscount || 0).toFixed(2)}`}
                 </SummaryValue>
               </SummaryRow>
             )}
             
             <SummaryRow>
               <SummaryLabel>المجموع الكلي</SummaryLabel>
-              <SummaryValue isTotal>{(orderData?.total || 0).toFixed(2)} ريال</SummaryValue>
+              <SummaryValue isTotal>
+                <span className="font-saudi_riyal">{'\uE900'}</span>
+                {` ${(orderData?.total || 0).toFixed(2)}`}
+              </SummaryValue>
             </SummaryRow>
           </OrderSummary>
         </Section>

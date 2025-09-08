@@ -1,58 +1,41 @@
-/* Saudi Riyal Font - Using src directory approach */
+/* Saudi Riyal Font - Matching customer app implementation */
 @font-face {
   font-family: 'saudi_riyal';
-  src: url('./fonts/saudi_riyal.woff2') format('woff2'),
-       url('./fonts/saudi_riyal.woff') format('woff'),
-       url('./fonts/saudi_riyal.ttf') format('truetype'),
-       url('./fonts/saudi_riyal.eot') format('embedded-opentype'),
-       url('./fonts/saudi_riyal.svg#saudi_riyal') format('svg');
+  src: url('/fonts/saudi_riyal.woff2') format('woff2'),
+       url('/fonts/saudi_riyal.woff') format('woff'),
+       url('/fonts/saudi_riyal.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: block;
 }
 
-/* Ensure the icon class correctly loads the Riyal symbol */
+/* Apply the custom font directly when you need to display the symbol */
+.font-saudi_riyal {
+  font-family: 'saudi_riyal', sans-serif !important;
+  position: relative;
+  display: inline-block;
+}
+
+/* Ensure the glyph renders even if the element text is empty */
+.font-saudi_riyal::before {
+  content: "\e900";
+  font-family: 'saudi_riyal' !important;
+  font-size: inherit;
+  color: inherit;
+  /* Only show the pseudo-element when the element has no meaningful text node */
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* If the element already contains the glyph as a text node, hide the fallback to avoid double symbols */
+.font-saudi_riyal:not(:empty)::before {
+  display: none;
+}
+
+/* Fallback icon class – keeps backward-compatibility with older markup */
 .icon-saudi_riyal::before {
   content: "\e900";
   font-family: 'saudi_riyal' !important;
   font-size: inherit;
   color: inherit;
-}
-
-/* Alternative approach for direct usage */
-.saudi-currency {
-  font-family: 'saudi_riyal' !important;
-}
-
-.saudi-currency::before {
-  content: "\e900";
-  font-family: 'saudi_riyal' !important;
-}
-
-/* Debug styles - remove these after testing */
-.font-saudi_riyal {
-  font-family: 'saudi_riyal' !important;
-}
-
-/* Test currency symbol specifically */
-.currency-test {
-  font-family: 'saudi_riyal' !important;
-  font-size: 24px;
-  color: #2E7D32;
-  font-weight: bold;
-}
-
-/* Debug: Show when font is loaded */
-body::after {
-  content: "Saudi Font CSS Loaded";
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: #4CAF50;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  z-index: 9999;
-  opacity: 0.8;
 }

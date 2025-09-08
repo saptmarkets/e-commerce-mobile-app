@@ -50,36 +50,36 @@ const SaudiFontDemoComponent = () => {
         Saudi Riyal Font provides excellent Arabic typography support for our e-commerce application.
       </DemoText>
       
-      {/* Test 1: CSS Class Approach */}
+      {/* Test 1: Direct Unicode (Customer App Approach) */}
+      <CurrencyDemo>
+        {theme.typography.currency.saudiRiyal} 150.00
+      </CurrencyDemo>
+      <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
+        Test 1: Direct unicode from theme (Customer App Approach)
+      </DemoText>
+
+      {/* Test 2: Direct Unicode String */}
+      <CurrencyDemo>
+        {'\uE900'} 250.00
+      </CurrencyDemo>
+      <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
+        Test 2: Direct unicode string \uE900
+      </DemoText>
+
+      {/* Test 3: Icon class approach */}
       <CurrencyDemo>
         <span className="icon-saudi_riyal"></span> 150.00
       </CurrencyDemo>
       <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
-        Test 1: CSS class .icon-saudi_riyal
+        Test 3: Icon class approach
       </DemoText>
 
-      {/* Test 2: Alternative CSS Class */}
-      <div className="currency-test">
-        <span className="saudi-currency"></span> 250.00
-      </div>
-      <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
-        Test 2: CSS class .saudi-currency
-      </DemoText>
-
-      {/* Test 3: Direct unicode (should work now) */}
+      {/* Test 4: Font class approach */}
       <CurrencyDemo>
-        {'\uE900'} 150.00
+        <span className="font-saudi_riyal">{theme.typography.currency.saudiRiyal}</span> 150.00
       </CurrencyDemo>
       <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
-        Test 3: Direct unicode \uE900
-      </DemoText>
-
-      {/* Test 4: Regular Arabic text */}
-      <div style={{ fontFamily: theme.typography.fontFamily.saudi, fontSize: '18px', textAlign: 'center', margin: '16px 0' }}>
-        نص تجريبي بالخط السعودي
-      </div>
-      <DemoText style={{ textAlign: 'center', fontSize: '14px', color: theme.colors.gray500 }}>
-        Test 4: Arabic text with Saudi font
+        Test 4: Font class with currency
       </DemoText>
     </SaudiFontDemo>
   );
