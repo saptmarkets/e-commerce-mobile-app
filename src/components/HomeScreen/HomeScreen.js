@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../theme';
 import ProductDetails from '../ProductDetails';
 import CategoriesScreen from '../CategoriesScreen';
@@ -771,7 +771,7 @@ const HomeScreen = ({ onNavigate }) => {
   React.useEffect(() => {
     const id = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 6000); // Increased from 4000ms to 6000ms for slower transitions
+    }, 4000); // 4s auto-advance per request
     return () => clearInterval(id);
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -1133,32 +1133,23 @@ const HomeScreen = ({ onNavigate }) => {
         </SearchSection>
 
                  {/* Banner Section */}
-         <BannerSection
-           bgImage={bannerImages[bannerIndex]}
-           key={bannerImages[bannerIndex]}
-           initial={{ opacity: 0, scale: 0.95, y: 10 }}
-           animate={{ opacity: 1, scale: 1, y: 0 }}
-           transition={{ 
-             duration: 1.2, 
-             delay: 0.3,
-             ease: [0.25, 0.46, 0.45, 0.94]
-           }}
-         >
-           <BannerContent
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ 
-               duration: 0.8, 
-               delay: 0.8,
-               ease: [0.25, 0.46, 0.45, 0.94]
-             }}
+         <AnimatePresence mode="wait">
+           <BannerSection
+             bgImage={bannerImages[bannerIndex]}
+             key={bannerImages[bannerIndex]}
+             initial={{ x: 40, opacity: 0 }}
+             animate={{ x: 0, opacity: 1 }}
+             exit={{ x: -40, opacity: 0 }}
+             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
            >
-             <BannerText>
-               <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
-               <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
-             </BannerText>
-           </BannerContent>
-         </BannerSection>
+             <BannerContent>
+               <BannerText>
+                 <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
+                 <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
+               </BannerText>
+             </BannerContent>
+           </BannerSection>
+         </AnimatePresence>
 
         {/* Quick Actions */}
         <QuickActions
