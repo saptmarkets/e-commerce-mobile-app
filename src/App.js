@@ -1,9 +1,10 @@
 import React from 'react';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import HomeScreen from './components/HomeScreen/HomeScreen';
+import SplashScreen from './components/SplashScreen/SplashScreen';
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = React.useState('welcome');
+  const [currentScreen, setCurrentScreen] = React.useState('splash');
 
   const handleGetStarted = () => {
     console.log('Get Started clicked! Navigating to home screen...');
@@ -27,9 +28,13 @@ const App = () => {
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       padding: '20px'
     }}>
-      {currentScreen === 'welcome' ? (
+      {currentScreen === 'splash' && (
+        <SplashScreen onDone={() => setCurrentScreen('welcome')} />
+      )}
+      {currentScreen === 'welcome' && (
         <WelcomeScreen onGetStarted={handleGetStarted} />
-      ) : (
+      )}
+      {currentScreen === 'home' && (
         <HomeScreen onNavigate={handleNavigation} />
       )}
     </div>
