@@ -171,13 +171,16 @@ const SearchSection = styled(motion.div)`
 
 // Banner Section
 const BannerSection = styled(motion.div)`
-  background: linear-gradient(135deg, #74bd43, #74308c);
+  background: url('/banner1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 20px;
   padding: 60px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
-  height: 1000px;
+  height: 200px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
@@ -189,7 +192,10 @@ const BannerSection = styled(motion.div)`
 const BannerImage = styled.div`
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #74bd43, #74308c);
+  background: url('/banner1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 20px;
   position: relative;
 `;
@@ -210,6 +216,10 @@ const BannerContent = styled.div`
 const BannerText = styled.div`
   flex: 1;
   text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
 `;
 
 const BannerTitle = styled.div`

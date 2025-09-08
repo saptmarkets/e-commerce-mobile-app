@@ -1,0 +1,5 @@
+[33m9774900[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m feat: Implement Saudi Riyal currency symbol across all screens
+[33mdc53ffc[m Fix Saudi font loading by moving CSS and fonts to src directory
+[33m8a79214[m Fix Saudi font implementation using npm package and CSS class approach
+[33mb5a4427[m Add Saudi Riyal font implementation with currency symbol support
+[33m6df419b[m Fix navigation errors: selectedProduct undefined and BottomNavigation in CategoryProducts
