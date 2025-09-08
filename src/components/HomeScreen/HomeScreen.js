@@ -188,19 +188,22 @@ const BannerSlider = styled(motion.div)`
   will-change: transform;
 `;
 
-const BannerSection = styled(motion.div).attrs(props => ({
-  style: {
-    backgroundImage: `url(${props.bgImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }
-}))`
+const BannerSection = styled(motion.div)`
   width: 50%; /* Each banner takes half the slider width */
   flex: 0 0 50%; /* Prevent shrinking to keep exact width */
   height: 100%;
   position: relative;
   background-color: #eee; /* visible while image loads */
+`;
+
+const BannerImg = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 `;
 
 
@@ -1158,8 +1161,8 @@ const HomeScreen = ({ onNavigate }) => {
              {bannerImages.map((image, index) => (
                <BannerSection
                  key={index}
-                 bgImage={image}
                >
+                 <BannerImg src={image} alt={`banner-${index + 1}`} />
                  <BannerContent>
                    <BannerText>
                      <BannerTitle>{bannerTexts[index].title}</BannerTitle>
