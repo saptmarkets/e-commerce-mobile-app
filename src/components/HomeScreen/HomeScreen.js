@@ -169,8 +169,15 @@ const SearchSection = styled(motion.div)`
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 `;
 
-// Banner Section (viewport)
-const BannerViewport = styled.div`
+// Banner Section
+const BannerSection = styled(motion.div).attrs(props => ({
+  style: {
+    backgroundImage: `url(${props.bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }
+}))`
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -182,22 +189,6 @@ const BannerViewport = styled.div`
   flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
-// Sliding track
-const BannerTrack = styled(motion.div)`
-  display: flex;
-  height: 100%;
-  will-change: transform;
-`;
-
-// Individual slide
-const BannerSlide = styled.div`
-  flex: 0 0 100%;
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
 
 const BannerContent = styled.div`
   position: absolute;
@@ -780,7 +771,7 @@ const HomeScreen = ({ onNavigate }) => {
   React.useEffect(() => {
     const id = setInterval(() => {
       setBannerIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 4000); // 4s auto-advance per request
+    }, 4000); // Changed back to 4 seconds for faster cycling
     return () => clearInterval(id);
   }, []);
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -1142,24 +1133,32 @@ const HomeScreen = ({ onNavigate }) => {
         </SearchSection>
 
                  {/* Banner Section */}
-         <BannerViewport>
-           <BannerTrack
-             animate={{ x: `-${bannerIndex * 100}%` }}
-             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-             style={{ width: `${bannerImages.length * 100}%` }}
+         <BannerSection
+           bgImage={bannerImages[bannerIndex]}
+           key={bannerImages[bannerIndex]}
+           initial={{ opacity: 0, scale: 0.95, y: 10 }}
+           animate={{ opacity: 1, scale: 1, y: 0 }}
+           transition={{ 
+             duration: 1.2, 
+             delay: 0.3,
+             ease: [0.25, 0.46, 0.45, 0.94]
+           }}
+         >
+           <BannerContent
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ 
+               duration: 0.8, 
+               delay: 0.8,
+               ease: [0.25, 0.46, 0.45, 0.94]
+             }}
            >
-             {bannerImages.map((src, i) => (
-               <BannerSlide key={i} style={{ backgroundImage: `url(${src})` }}>
-                 <BannerContent>
-                   <BannerText>
-                     <BannerTitle>{bannerTexts[i].title}</BannerTitle>
-                     <BannerSubtitle>{bannerTexts[i].subtitle}</BannerSubtitle>
-                   </BannerText>
-                 </BannerContent>
-               </BannerSlide>
-             ))}
-           </BannerTrack>
-         </BannerViewport>
+             <BannerText>
+               <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
+               <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
+             </BannerText>
+           </BannerContent>
+         </BannerSection>
 
         {/* Quick Actions */}
         <QuickActions
