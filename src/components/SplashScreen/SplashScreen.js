@@ -34,7 +34,7 @@ const LogoImage = styled.img`
   height: 250px;
   object-fit: contain;
   position: absolute;
-  top: 60px;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
 `;
