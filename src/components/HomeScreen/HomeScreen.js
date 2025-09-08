@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { theme } from '../../theme';
 import ProductDetails from '../ProductDetails';
 import CategoriesScreen from '../CategoriesScreen';
@@ -169,15 +169,8 @@ const SearchSection = styled(motion.div)`
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 `;
 
-// Banner Section
-const BannerSection = styled(motion.div).attrs(props => ({
-  style: {
-    backgroundImage: `url(${props.bgImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }
-}))`
+// Banner Section (viewport)
+const BannerViewport = styled.div`
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -189,6 +182,22 @@ const BannerSection = styled(motion.div).attrs(props => ({
   flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
+// Sliding track
+const BannerTrack = styled(motion.div)`
+  display: flex;
+  height: 100%;
+  will-change: transform;
+`;
+
+// Individual slide
+const BannerSlide = styled.div`
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
 
 const BannerContent = styled.div`
   position: absolute;
@@ -1133,23 +1142,24 @@ const HomeScreen = ({ onNavigate }) => {
         </SearchSection>
 
                  {/* Banner Section */}
-         <AnimatePresence mode="wait">
-           <BannerSection
-             bgImage={bannerImages[bannerIndex]}
-             key={bannerImages[bannerIndex]}
-             initial={{ x: 40 }}
-             animate={{ x: 0 }}
-             exit={{ x: -40 }}
-             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+         <BannerViewport>
+           <BannerTrack
+             animate={{ x: `-${bannerIndex * 100}%` }}
+             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+             style={{ width: `${bannerImages.length * 100}%` }}
            >
-             <BannerContent>
-               <BannerText>
-                 <BannerTitle>{bannerTexts[bannerIndex].title}</BannerTitle>
-                 <BannerSubtitle>{bannerTexts[bannerIndex].subtitle}</BannerSubtitle>
-               </BannerText>
-             </BannerContent>
-           </BannerSection>
-         </AnimatePresence>
+             {bannerImages.map((src, i) => (
+               <BannerSlide key={i} style={{ backgroundImage: `url(${src})` }}>
+                 <BannerContent>
+                   <BannerText>
+                     <BannerTitle>{bannerTexts[i].title}</BannerTitle>
+                     <BannerSubtitle>{bannerTexts[i].subtitle}</BannerSubtitle>
+                   </BannerText>
+                 </BannerContent>
+               </BannerSlide>
+             ))}
+           </BannerTrack>
+         </BannerViewport>
 
         {/* Quick Actions */}
         <QuickActions
