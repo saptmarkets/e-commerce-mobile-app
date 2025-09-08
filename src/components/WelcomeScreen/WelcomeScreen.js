@@ -701,8 +701,8 @@ const WelcomeScreen = ({ onGetStarted }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0 }}
           >
-            <span>←</span>
-            <span style={{ fontFamily: theme.typography.fontFamily.arabic }}>ابدأ التسوق</span>
+            <span>Start Shopping</span>
+            <span>→</span>
           </CTAButton>
           
           {/* Big Cart Icon */}

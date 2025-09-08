@@ -178,6 +178,7 @@ const BannerContainer = styled.div`
   height: 200px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  background: #eee; /* fallback while image loads */
   flex-shrink: 0; /* Prevent banner from shrinking */
 `;
 
@@ -193,21 +194,12 @@ const BannerSection = styled(motion.div)`
   flex: 0 0 50%; /* Prevent shrinking to keep exact width */
   height: 100%;
   position: relative;
-  background-color: #eee; /* visible while image loads */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
-const BannerImg = styled.img`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  user-select: none;
-  -webkit-user-drag: none;
-`;
-
-
-const BannerContent = styled.div`
+const BannerContent = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
@@ -1161,9 +1153,17 @@ const HomeScreen = ({ onNavigate }) => {
              {bannerImages.map((image, index) => (
                <BannerSection
                  key={index}
+                 style={{ backgroundImage: `url(${image})` }}
                >
-                 <BannerImg src={image} alt={`banner-${index + 1}`} />
-                 <BannerContent>
+                 <BannerContent
+                   initial={{ opacity: 0, y: 20 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   transition={{ 
+                     duration: 0.8, 
+                     delay: 0.5,
+                     ease: [0.25, 0.46, 0.45, 0.94]
+                   }}
+                 >
                    <BannerText>
                      <BannerTitle>{bannerTexts[index].title}</BannerTitle>
                      <BannerSubtitle>{bannerTexts[index].subtitle}</BannerSubtitle>
