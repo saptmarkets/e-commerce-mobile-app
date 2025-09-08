@@ -29,12 +29,14 @@ const LogoBackdrop = styled(motion.div)`
   filter: blur(0.5px);
 `;
 
-const LogoImage = styled(motion.img)`
-  width: 200px;
-  height: 200px;
+const LogoImage = styled.img`
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   position: absolute;
-  top: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const CartIcon = styled(motion.svg)`
@@ -70,9 +72,6 @@ const SplashScreen = ({ onDone }) => {
       <LogoImage
         src="/logo sapt white.png"
         alt="SAPT Logo"
-        initial={{ scale: 0.5, opacity: 0, y: -50 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
       />
       
       <Center>
